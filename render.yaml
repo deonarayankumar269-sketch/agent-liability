@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: agentliability
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix client --include=dev && npm run build --prefix client && npm install --prefix server --omit=optional
+    startCommand: node server/src/app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: PUBLIC_URL
+        sync: false
+      - key: SIGNING_SEED
+        generateValue: true
+      - key: AUDIT_HMAC_SECRET
+        generateValue: true
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
